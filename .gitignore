@@ -21,3 +21,22 @@
 /yarn-error.log
 
 .byebug_history
+
+/.env
+/.idea
+/dump.rdb
+.DS_Store
+/csv_data/*.csv
+
+public/api-docs.json
+public/api
+public/assets
+
+log/*
+config/database.yml
+config/credentials.yml
+config/secrets.yml
+
+google_drive_config.json
+/dist
+.config
