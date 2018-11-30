@@ -60,5 +60,5 @@
 #     # password: "please use keys"
 #   }
 
-server 'linc_blazer', user: "deploy", roles: %w{app}
+server 'linc_blazer', user: "deploy", roles: %w{app db web}
 set :rails_env, "production"

@@ -31,6 +31,7 @@ gem 'jbuilder', '~> 2.5'
 group :development do
   # Use Capistrano for deployment
   gem 'capistrano-rails', require: false
+  gem 'capistrano3-puma'
 end
 
 # Reduces boot times through caching; required in config/boot.rb
