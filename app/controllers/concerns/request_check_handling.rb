@@ -28,4 +28,12 @@ module Concerns::RequestCheckHandling
   def check_password
     invalid_password unless Security.encode_password(params['password'], @user.salt) == @user.password
   end
+
+  def check_phone_format
+    invalid_phone_format unless params['phone'].present? && params['phone'].to_s.match?(Validations::PhoneValidator::PHONE_REGEXP)
+  end
+
+  def check_phone_exist
+    phone_already_exist if User.exists?(verifiedMobile: params['phone'])
+  end
 end

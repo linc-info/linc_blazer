@@ -33,6 +33,8 @@ gem 'httparty'
 gem 'blazer'
 gem 'dotenv-rails'
 
+gem 'aws-sdk-sns'
+
 group :development do
   # Use Capistrano for deployment
   gem 'capistrano-rails', require: false
