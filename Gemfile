@@ -32,6 +32,7 @@ gem 'httparty'
 
 gem 'blazer'
 gem 'dotenv-rails'
+gem 'swagger-blocks'
 
 group :development do
   # Use Capistrano for deployment
