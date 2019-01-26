@@ -2,7 +2,7 @@
 module Concerns
   module Api
     module V1
-      module CourseControllerDoc
+      module CoursesControllerDoc
         extend ActiveSupport::Concern
         included do
           swagger_path '/api/v1/shops/{id}' do

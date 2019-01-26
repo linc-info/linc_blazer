@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   require 'sidekiq/web'
   mount Sidekiq::Web, at: "/sidekiq"
 
+  get 'docs' => redirect('/swagger-ui/dist/index.html');
+
   namespace :api do
     namespace :v1 do
       get 'api-docs', to: 'docs#index'

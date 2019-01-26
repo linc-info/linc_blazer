@@ -2,6 +2,7 @@ module Api
   module V1
     class CoursesController < ApiController
       include Swagger::Blocks
+      include Concerns::Api::V1::CoursesControllerDoc
 
       #skip_before_action :doorkeeper_authorize!
       # before_action :set_prefectures, only: [:index, :show]

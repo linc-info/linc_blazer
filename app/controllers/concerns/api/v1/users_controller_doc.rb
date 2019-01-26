@@ -1,3 +1,4 @@
+# just a sample for user controller api, you can modify it as you want.
 # rubocop:disable Metrics/ModuleLength, Metrics/BlockLength
 module Concerns
   module Api
