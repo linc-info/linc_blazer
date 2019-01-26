@@ -34,6 +34,8 @@ gem 'blazer'
 gem 'dotenv-rails'
 gem 'swagger-blocks'
 
+gem 'aws-sdk-sns'
+
 group :development do
   # Use Capistrano for deployment
   gem 'capistrano-rails', require: false

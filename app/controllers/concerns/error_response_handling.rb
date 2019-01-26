@@ -20,4 +20,16 @@ module Concerns::ErrorResponseHandling
   def invalid_sesson_id
     render json: {error: I18n.t("error.invalid_sesson_id")}, status: :bad_request
   end
+
+  def invalid_phone_format
+    render json: {error: I18n.t("error.invalid_phone_format")}, status: :bad_request
+  end
+
+  def phone_already_exist
+    render json: {error: I18n.t("error.phone_already_exist")}, status: :bad_request
+  end
+
+  def sns_already_sent
+    render json: {error: I18n.t("error.sns_already_sent")}, status: :bad_request
+  end
 end
