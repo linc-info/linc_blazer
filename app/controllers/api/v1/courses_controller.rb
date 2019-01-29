@@ -9,7 +9,7 @@ module Api
 
       def index
         #authorize Course
-        @courses = Course.all
+        @courses = Course.select(select_columns).first 10
         render json: @courses, status: 200
       end
 
@@ -25,7 +25,7 @@ module Api
         end
 
         def select_columns
-          [ :id, :name ]
+          [ :id, :title ]
         end
     end
   end

@@ -12,6 +12,9 @@ Rails.application.routes.draw do
       post 'sessions', to: 'sessions#create'
       post 'sessions/destroy', to: 'sessions#destroy'
       post 'notification/send_sns', to: 'notification#send_sns'
+
+      get 'courses', to: 'courses#index'
+      get 'courses/:id', to: 'courses#show'
     end
   end
 end
