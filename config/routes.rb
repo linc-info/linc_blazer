@@ -8,9 +8,13 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       get 'api-docs', to: 'docs#index'
+
       post 'users', to: 'users#create'
+      post 'users/check', to: 'users#check'
+
       post 'sessions', to: 'sessions#create'
       post 'sessions/destroy', to: 'sessions#destroy'
+
       post 'notification/send_sns', to: 'notification#send_sns'
 
       get 'courses', to: 'courses#index'

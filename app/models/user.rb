@@ -2,6 +2,8 @@ class User < ApplicationRecord
   self.table_name = 'user'
   self.inheritance_column = :_type_disabled
 
+  PASSWORD_REGEXP = /\A[\S]{5,20}\z/
+
   validates :email, uniqueness: true
   validates_with Validations::EmailValidator
 

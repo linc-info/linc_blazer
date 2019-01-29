@@ -192,3 +192,6 @@ zh:
     invalid_phone_format: "手机号码格式错误"
     phone_already_exist: "手机号码已被注册"
     sns_already_sent: "请稍后再发送短信验证码,过于频繁"
+    invalid_nickname_format: "用户名格式错误"
+    nickname_already_exist: "用户名已被注册"
+    invalid_password_format: "密码格式错误"
