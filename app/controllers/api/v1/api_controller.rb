@@ -1,6 +1,7 @@
 class Api::V1::ApiController < ApplicationController
   include Concerns::ErrorResponseHandling
   include Concerns::RequestCheckHandling
+  include Swagger::Blocks
 
   skip_before_action :verify_authenticity_token
 

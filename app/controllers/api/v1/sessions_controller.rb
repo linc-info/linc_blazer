@@ -1,4 +1,5 @@
 class Api::V1::SessionsController < Api::V1::ApiController
+  include Concerns::Api::V1::SessionsControllerDoc
   before_action :check_user, only: :create
   before_action :check_password, only: :create
   before_action :check_session_id, only: :destroy

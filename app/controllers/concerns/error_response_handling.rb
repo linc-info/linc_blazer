@@ -18,7 +18,7 @@ module Concerns::ErrorResponseHandling
   end
 
   def invalid_sesson_id
-    render json: {error: I18n.t("error.invalid_sesson_id")}, status: :bad_request
+    render json: {error: I18n.t("error.invalid_sesson_id")}, status: :unauthorized
   end
 
   def invalid_phone_format
@@ -32,4 +32,18 @@ module Concerns::ErrorResponseHandling
   def sns_already_sent
     render json: {error: I18n.t("error.sns_already_sent")}, status: :bad_request
   end
+
+  def invalid_nickname_format
+    render json: {error: I18n.t("error.invalid_nickname_format")}, status: :bad_request
+  end
+
+  def nickname_already_exist
+    render json: {error: I18n.t("error.nickname_already_exist")}, status: :bad_request
+  end
+
+  def invalid_password_format
+    render json: {error: I18n.t("error.invalid_password_format")}, status: :bad_request
+  end
+
+
 end
