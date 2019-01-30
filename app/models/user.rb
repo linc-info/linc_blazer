@@ -1,8 +1,9 @@
 class User < ApplicationRecord
+  include Concerns::Sign
   self.table_name = 'user'
   self.inheritance_column = :_type_disabled
 
-  PASSWORD_REGEXP = /\A[\S]{5,20}\z/
+  has_many :user_profiles, foreign_key: 'id'
 
   validates :email, uniqueness: true
   validates_with Validations::EmailValidator

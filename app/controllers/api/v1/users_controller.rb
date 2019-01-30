@@ -5,9 +5,10 @@ class Api::V1::UsersController < Api::V1::ApiController
   before_action :check_nickname_format, only: %i[create check]
   before_action :check_nickname_exist, only: %i[create check]
   before_action :check_password_format, only: %i[create check]
+  before_action :check_signature, only: :create
 
   def create
-
+    render json: User.sign_up(params['phone'], params['nickname'], params['password'])
   end
 
   def check;end

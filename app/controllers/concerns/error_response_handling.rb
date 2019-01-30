@@ -45,5 +45,9 @@ module Concerns::ErrorResponseHandling
     render json: {error: I18n.t("error.invalid_password_format")}, status: :bad_request
   end
 
+  def invalid_signature
+    render json: {error: I18n.t("error.invalid_signature")}, status: :bad_request
+  end
+
 
 end
