@@ -1,6 +1,8 @@
 require 'base64'
 require 'digest'
+require 'openssl'
 class Security
+  FAKE_EMAIL_PREFIX = '__fake__'
   class << self
     def encode_password(password, salt)
       salted = password.to_s + "{" + salt + "}"
@@ -21,12 +23,16 @@ class Security
       Digest::SHA1.hexdigest SecureRandom.hex
     end
 
-    def sign(secret, nonce, url)
-      OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new('sha256'), secret, "#{nonce}#{url}")
+    def sign(secret, nonce)
+      OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new('sha256'), secret, nonce)
     end
 
-    def verify?(token, nonce, signature, url)
-      (app_token == token) && sign(app_secret, nonce, url) == signature
+    def generate_fake_email
+      FAKE_EMAIL_PREFIX + Time.zone.now.to_i.to_s + 6.times.map {rand(10)}.join + '@fakeemail.com'
+    end
+
+    def verify?(nonce, signature)
+      sign(app_secret, nonce) == signature
     end
 
     def app_token

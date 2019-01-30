@@ -12,6 +12,8 @@ module Concerns
               key :operationId, 'sign up'
               key :tags, ['User']
               parameter :app_token
+              parameter(name: 'X-SIGNATURE', in: :header, description: 'signature of app token', required: true, type: :string)
+              parameter(name: 'X-NONCE', in: :header, description: 'nonce of signature', required: true, type: :string)
               parameter(name: 'phone', in: :query, description: 'Phone number exp: +819000000000', required: true, type: :string)
               parameter(name: 'nickname', in: :query, description: 'name of user', required: true, type: :string)
               parameter(name: 'password', in: :query, description: 'password of user', required: true, type: :string)

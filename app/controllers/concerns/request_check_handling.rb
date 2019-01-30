@@ -9,6 +9,14 @@ module Concerns::RequestCheckHandling
     request.headers['X-SESSION-ID']
   end
 
+  def nonce_header
+    request.headers['X-NONCE']
+  end
+
+  def signature_header
+    request.headers['X-SIGNATURE']
+  end
+
   def check_session_id
     invalid_sesson_id unless User.exists?(loginSessionId: session_id_header)
     @user = User.find_by(loginSessionId: session_id_header)
@@ -46,5 +54,9 @@ module Concerns::RequestCheckHandling
 
   def check_password_format
     invalid_password_format unless params['password'].present? && params['password'].to_s.match?(User::PASSWORD_REGEXP)
+  end
+
+  def check_signature
+    invalid_signature unless Security.verify?(nonce_header, signature_header)
   end
 end

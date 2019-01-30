@@ -195,3 +195,4 @@ zh:
     invalid_nickname_format: "用户名格式错误"
     nickname_already_exist: "用户名已被注册"
     invalid_password_format: "密码格式错误"
+    invalid_signature: "签名错误"
