@@ -25,4 +25,8 @@ class User < ApplicationRecord
   def update_session_id
     update!(loginSessionId: SecureRandom.hex(13), loginTime: Time.zone.now.to_i)
   end
+
+  def update_password(password)
+    update!(password: Security.encode_password(password, salt))
+  end
 end

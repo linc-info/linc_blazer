@@ -49,5 +49,8 @@ module Concerns::ErrorResponseHandling
     render json: {error: I18n.t("error.invalid_signature")}, status: :bad_request
   end
 
+  def invalid_verification_code
+    render json: {error: I18n.t("error.invalid_verification_code")}, status: :bad_request
+  end
 
 end

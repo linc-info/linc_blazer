@@ -17,6 +17,7 @@ module Concerns
               parameter(name: 'phone', in: :query, description: 'Phone number exp: +819000000000', required: true, type: :string)
               parameter(name: 'nickname', in: :query, description: 'name of user', required: true, type: :string)
               parameter(name: 'password', in: :query, description: 'password of user', required: true, type: :string)
+              parameter(name: 'verification_code', in: :query, description: 'sns verification code', required: true, type: :string)
               response 200 do
                 key :description, 'success'
               end
@@ -33,6 +34,21 @@ module Concerns
               parameter(name: 'nickname', in: :query, description: 'name of user', required: true, type: :string)
               parameter(name: 'password', in: :query, description: 'password of user', required: true, type: :string)
               response 204 do
+                key :description, 'success'
+              end
+            end
+          end
+
+          swagger_path '/api/v1/users/reset_password' do
+            operation :post do
+              key :summary, 'reset password'
+              key :operationId, 'reset password'
+              key :tags, ['User']
+              parameter :app_token
+              parameter(name: 'phone', in: :query, description: 'Phone number exp: +819000000000', required: true, type: :string)
+              parameter(name: 'password', in: :query, description: 'password of user', required: true, type: :string)
+              parameter(name: 'verification_code', in: :query, description: 'sns verification code', required: true, type: :string)
+              response 200 do
                 key :description, 'success'
               end
             end

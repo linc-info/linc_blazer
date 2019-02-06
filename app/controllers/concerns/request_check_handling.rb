@@ -59,4 +59,8 @@ module Concerns::RequestCheckHandling
   def check_signature
     invalid_signature unless Security.verify?(nonce_header, signature_header)
   end
+
+  def check_verification_code
+    invalid_verification_code unless session[:verification_code] == params['verification_code'] && session[:phone] == params['phone']
+  end
 end

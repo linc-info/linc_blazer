@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
       post 'users', to: 'users#create'
       post 'users/check', to: 'users#check'
+      post 'users/reset_password', to: 'users#reset_password'
 
       post 'sessions', to: 'sessions#create'
       post 'sessions/destroy', to: 'sessions#destroy'
