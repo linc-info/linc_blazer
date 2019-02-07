@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_04_21_162212) do
+ActiveRecord::Schema.define(version: 2019_02_06_093021) do
 
   create_table "activity", id: :integer, comment: "主键", unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title", null: false, comment: "标题"
@@ -28,6 +28,8 @@ ActiveRecord::Schema.define(version: 2018_04_21_162212) do
     t.integer "updatedTime", default: 0, null: false, comment: "最后更新时间", unsigned: true
     t.integer "copyId", default: 0, null: false, comment: "复制来源activity的id"
     t.integer "migrateLessonId", default: 0
+    t.string "finishType", limit: 64, default: "time", null: false, comment: "任务完成条件类型"
+    t.string "finishData", limit: 256, default: "0", null: false, comment: "任务完成条件数据"
     t.index ["migrateLessonId", "mediaType"], name: "migrateLessonIdAndType"
   end
 
@@ -82,7 +84,9 @@ ActiveRecord::Schema.define(version: 2018_04_21_162212) do
     t.integer "liveId", null: false, comment: "直播间ID"
     t.integer "liveProvider", null: false, comment: "直播供应商"
     t.string "replayStatus", limit: 14, default: "ungenerated", null: false, comment: "回放状态"
+    t.string "progressStatus", limit: 100, default: "created", null: false, comment: "直播进行状态"
     t.integer "mediaId", default: 0, comment: "视频文件ID", unsigned: true
+    t.string "roomType", limit: 20, default: "large", null: false, comment: "直播大小班课类型"
     t.integer "roomCreated", default: 0, null: false, comment: "直播教室是否已创建", unsigned: true
     t.integer "migrateLessonId", default: 0
   end
@@ -149,7 +153,7 @@ ActiveRecord::Schema.define(version: 2018_04_21_162212) do
     t.string "source", limit: 1024, default: "", comment: "来源"
     t.string "sourceUrl", limit: 1024, default: "", comment: "来源URL"
     t.integer "publishedTime", default: 0, null: false, comment: "发布时间", unsigned: true
-    t.text "body", comment: "正文"
+    t.text "body", limit: 4294967295, comment: "内容正文"
     t.string "thumb", default: "", null: false, comment: "缩略图"
     t.string "originalThumb", default: "", null: false, comment: "缩略图原图"
     t.string "picture", default: "", null: false, comment: "文章头图，文章编辑／添加时，自动取正文的第１张图"
@@ -200,6 +204,53 @@ ActiveRecord::Schema.define(version: 2018_04_21_162212) do
     t.integer "sendedTime", default: 0, null: false, comment: "群发通知的发送时间"
   end
 
+  create_table "biz_invoice", id: :integer, comment: "ID", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "sn", limit: 64, null: false, comment: "申请开票号"
+    t.string "title", default: "", null: false, comment: "发票抬头"
+    t.string "type", limit: 10, null: false, comment: "发票类型"
+    t.string "taxpayer_identity", default: "", null: false, comment: "纳税人识别号"
+    t.string "content", limit: 100, default: "", null: false, comment: "发票内容"
+    t.string "comment", default: "", null: false, comment: "备注"
+    t.string "address", comment: "邮寄地址"
+    t.string "phone", default: "", null: false, comment: "联系电话"
+    t.string "company_mobile", limit: 20, comment: "公司电话"
+    t.string "company_address", comment: "公司地址"
+    t.string "email", default: "", null: false, comment: "电子邮箱"
+    t.string "receiver", limit: 100, default: "", null: false, comment: "收件人"
+    t.integer "user_id", default: 0, null: false, comment: "用户Id"
+    t.string "status", limit: 9, default: "unchecked", null: false, comment: "申请状态"
+    t.bigint "money", default: 0, null: false, comment: "开票金额"
+    t.integer "review_user_id", default: 0, comment: "审核人Id"
+    t.string "bank", comment: "开户行"
+    t.string "account", comment: "开户行账号"
+    t.string "number", limit: 64, default: "", comment: "发票号"
+    t.string "post_name", limit: 20, comment: "快递名称"
+    t.string "post_number", limit: 64, default: "", comment: "邮寄号"
+    t.string "refuse_comment", default: "", comment: "拒绝备注"
+    t.integer "created_time", default: 0, comment: "创建时间", unsigned: true
+    t.integer "updated_time", default: 0, comment: "更新时间", unsigned: true
+  end
+
+  create_table "biz_invoice_template", id: :integer, comment: "ID", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "title", default: "", null: false, comment: "发票抬头"
+    t.string "type", limit: 10, null: false, comment: "发票类型"
+    t.string "taxpayer_identity", default: "", null: false, comment: "纳税人识别号"
+    t.string "content", limit: 100, default: "培训费", null: false, comment: "发票内容"
+    t.string "comment", default: "", null: false, comment: "备注"
+    t.string "email", default: "", null: false, comment: "电子邮箱"
+    t.string "address", comment: "邮寄地址"
+    t.string "company_address", comment: "公司地址"
+    t.string "bank", comment: "开户行"
+    t.string "account", comment: "开户行账号"
+    t.string "company_mobile", limit: 20, comment: "公司电话"
+    t.string "phone", limit: 20, default: "", null: false, comment: "联系电话"
+    t.string "receiver", limit: 100, default: "", null: false, comment: "收件人"
+    t.integer "user_id", default: 0, null: false, comment: "用户Id"
+    t.integer "created_time", default: 0, comment: "创建时间", unsigned: true
+    t.integer "updated_time", default: 0, comment: "更新时间", unsigned: true
+    t.integer "is_default", limit: 1, default: 0, null: false, comment: "是否默认", unsigned: true
+  end
+
   create_table "biz_online", id: :integer, comment: "主键", unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.binary "sess_id", limit: 128, null: false
     t.integer "active_time", default: 0, null: false, comment: "最后活跃时间", unsigned: true
@@ -246,7 +297,6 @@ ActiveRecord::Schema.define(version: 2018_04_21_162212) do
     t.integer "created_time", default: 0, null: false, unsigned: true
     t.integer "updated_time", default: 0, null: false, unsigned: true
     t.integer "migrate_id", default: 0, null: false, comment: "数据迁移原表id"
-    t.string "invoice_sn", limit: 64, default: "", comment: "申请开票sn"
     t.index ["migrate_id"], name: "migrate_id"
     t.index ["sn"], name: "sn", unique: true
   end
@@ -276,6 +326,7 @@ ActiveRecord::Schema.define(version: 2018_04_21_162212) do
     t.integer "updated_time", default: 0, null: false, unsigned: true
     t.integer "migrate_id", default: 0, null: false, comment: "数据迁移原表id"
     t.index ["migrate_id"], name: "migrate_id"
+    t.index ["order_id"], name: "order_id"
     t.index ["sn"], name: "sn", unique: true
   end
 
@@ -420,9 +471,11 @@ ActiveRecord::Schema.define(version: 2018_04_21_162212) do
     t.integer "updated_time", default: 0, null: false, unsigned: true
     t.integer "created_time", default: 0, null: false, unsigned: true
     t.integer "migrate_id", default: 0, null: false, comment: "数据迁移原表id"
+    t.string "invoice_sn", limit: 64, default: "0", comment: "申请开票sn"
     t.index ["migrate_id"], name: "migrate_id"
     t.index ["trade_sn"], name: "trade_sn", unique: true
     t.index ["type"], name: "type"
+    t.index ["user_id"], name: "user_id"
   end
 
   create_table "biz_pay_user_balance", id: :integer, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -491,6 +544,7 @@ ActiveRecord::Schema.define(version: 2018_04_21_162212) do
     t.bigint "end_time", default: 0, null: false, comment: "终止时间/毫秒", unsigned: true
     t.integer "cost_time", default: 0, null: false, comment: "花费时间/毫秒", unsigned: true
     t.integer "process_id", default: 0, null: false, comment: "jobProcessId", unsigned: true
+    t.string "pid", limit: 32, default: "", null: false, comment: "进程组ID"
     t.text "failure_msg"
     t.integer "updated_time", null: false, comment: "修改时间", unsigned: true
     t.integer "created_time", null: false, comment: "任务创建时间", unsigned: true
@@ -503,6 +557,8 @@ ActiveRecord::Schema.define(version: 2018_04_21_162212) do
   create_table "biz_scheduler_job_log", id: :integer, comment: "编号", unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "job_id", null: false, comment: "任务编号", unsigned: true
     t.integer "job_fired_id", default: 0, null: false, comment: "激活的任务编号", unsigned: true
+    t.integer "process_id", default: 0, null: false, comment: "jobProcessId", unsigned: true
+    t.string "pid", limit: 32, default: "", null: false, comment: "进程组ID"
     t.string "hostname", limit: 128, default: "", null: false, comment: "执行的主机"
     t.string "name", limit: 128, null: false, comment: "任务名称"
     t.string "pool", limit: 64, default: "default", null: false, comment: "所属组"
@@ -905,7 +961,7 @@ ActiveRecord::Schema.define(version: 2018_04_21_162212) do
     t.string "type", null: false, comment: "内容类型"
     t.string "alias", default: "", null: false, comment: "内容别名"
     t.text "summary", comment: "内容摘要"
-    t.text "body", comment: "内容正文"
+    t.text "body", limit: 4294967295, comment: "内容正文"
     t.string "picture", default: "", null: false, comment: "内容头图"
     t.string "template", default: "", null: false, comment: "内容模板"
     t.string "status", limit: 11, null: false, comment: "内容状态"
@@ -1036,26 +1092,17 @@ ActiveRecord::Schema.define(version: 2018_04_21_162212) do
     t.integer "seq", default: 1, null: false, comment: "章节序号", unsigned: true
     t.string "title", null: false, comment: "章节名称"
     t.integer "createdTime", null: false, comment: "章节创建时间", unsigned: true
+    t.integer "updatedTime", default: 0, null: false, comment: "修改时间", unsigned: true
     t.integer "copyId", default: 0, null: false, comment: "复制章节的id"
+    t.string "status", limit: 20, default: "published", null: false, comment: "发布状态 create|published|unpublished"
+    t.boolean "isOptional", default: false, null: false, comment: "是否选修"
     t.integer "migrateLessonId", default: 0
     t.integer "migrateCopyCourseId", default: 0
     t.integer "migrateRefTaskId", default: 0
     t.integer "mgrateCopyTaskId", default: 0
-  end
-
-  create_table "course_chapter_8_0_19_backup", id: :integer, comment: "课程章节ID", unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "courseId", null: false, comment: "章节所属课程ID", unsigned: true
-    t.string "type", default: "chapter", null: false, comment: "章节类型：chapter为章节，unit为单元，lesson为课时。"
-    t.integer "parentId", default: 0, null: false, comment: "parentId大于０时为单元", unsigned: true
-    t.integer "number", null: false, comment: "章节编号", unsigned: true
-    t.integer "seq", null: false, comment: "章节序号", unsigned: true
-    t.string "title", null: false, comment: "章节名称"
-    t.integer "createdTime", null: false, comment: "章节创建时间", unsigned: true
-    t.integer "copyId", default: 0, null: false, comment: "复制章节的id"
-    t.integer "migrateLessonId", default: 0
-    t.integer "migrateCopyCourseId", default: 0
-    t.integer "migrateRefTaskId", default: 0
-    t.integer "mgrateCopyTaskId", default: 0
+    t.integer "migrate_task_id", default: 0, null: false, comment: "来源任务表id"
+    t.integer "published_number", default: 0, null: false, comment: "已发布的章节编号", unsigned: true
+    t.index ["migrate_task_id"], name: "migrate_task_id"
   end
 
   create_table "course_draft", id: :integer, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -1236,6 +1283,8 @@ ActiveRecord::Schema.define(version: 2018_04_21_162212) do
     t.index ["courseId", "role", "createdTime"], name: "courseId_role_createdTime"
     t.index ["courseId", "userId"], name: "courseId", unique: true
     t.index ["courseSetId"], name: "courseSetId"
+    t.index ["role", "classroomId", "createdTime"], name: "role_classroom_createdTime"
+    t.index ["userId"], name: "userid"
   end
 
   create_table "course_note", id: :integer, comment: "笔记ID", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -1370,12 +1419,14 @@ ActiveRecord::Schema.define(version: 2018_04_21_162212) do
     t.integer "courseTaskId", default: 0, null: false, comment: "课程的任务id", unsigned: true
     t.integer "userId", default: 0, null: false, comment: "用户id", unsigned: true
     t.string "status", default: "start", null: false, comment: "任务状态，start，finish"
+    t.integer "lastLearnTime", default: 0, comment: "最后学习时间"
     t.integer "finishedTime", default: 0, null: false, comment: "完成时间", unsigned: true
     t.integer "createdTime", default: 0, null: false, comment: "创建时间", unsigned: true
     t.integer "updatedTime", default: 0, null: false, comment: "最后更新时间", unsigned: true
     t.integer "time", default: 0, null: false, comment: "任务进行时长（分钟）", unsigned: true
     t.integer "watchTime", default: 0, null: false, unsigned: true
     t.index ["courseTaskId", "activityId"], name: "courseTaskId_activityId"
+    t.index ["finishedTime"], name: "finishedTime"
     t.index ["userId", "courseId"], name: "idx_userId_courseId"
   end
 
@@ -1435,6 +1486,8 @@ ActiveRecord::Schema.define(version: 2018_04_21_162212) do
   create_table "course_v8", id: :integer, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "courseSetId", null: false
     t.string "title", limit: 1024
+    t.string "subtitle", limit: 120, default: "", comment: "计划副标题"
+    t.string "courseSetTitle", limit: 128, default: "", null: false, comment: "所属课程名称"
     t.string "learnMode", limit: 32, comment: "lockMode, freeMode"
     t.string "expiryMode", limit: 32, comment: "days, date"
     t.integer "expiryDays"
@@ -1446,6 +1499,7 @@ ActiveRecord::Schema.define(version: 2018_04_21_162212) do
     t.boolean "isDefault", default: false
     t.integer "maxStudentNum", default: 0
     t.string "status", limit: 32, comment: "draft, published, closed"
+    t.integer "seq", default: 0, null: false, comment: "排序序号"
     t.integer "creator"
     t.boolean "isFree", default: false
     t.float "price", default: 0.0
@@ -1457,6 +1511,8 @@ ActiveRecord::Schema.define(version: 2018_04_21_162212) do
     t.text "services"
     t.integer "taskNum", default: 0, comment: "任务数"
     t.integer "compulsoryTaskNum", default: 0, comment: "必修任务数"
+    t.integer "lessonNum", default: 0, null: false, comment: "课时总数"
+    t.integer "publishLessonNum", default: 0, null: false, comment: "课时发布数量"
     t.integer "studentNum", default: 0, comment: "学员数"
     t.string "teacherIds", limit: 1024, default: "0", comment: "可见教师ID列表"
     t.integer "parentId", default: 0, null: false, comment: "课程的父Id", unsigned: true
@@ -1490,7 +1546,7 @@ ActiveRecord::Schema.define(version: 2018_04_21_162212) do
     t.integer "materialNum", default: 0, null: false, comment: "上传的资料数量", unsigned: true
     t.integer "maxRate", limit: 1, default: 0, comment: "最大抵扣百分比"
     t.string "serializeMode", limit: 32, default: "none", null: false, comment: "none, serilized, finished"
-    t.boolean "showServices", default: true, null: false, comment: "是否在营销页展示服务承诺"
+    t.boolean "showServices", default: false, null: false, comment: "是否在营销页展示服务承诺"
     t.integer "recommended", limit: 1, default: 0, null: false, comment: "是否为推荐课程", unsigned: true
     t.integer "recommendedSeq", default: 0, null: false, comment: "推荐序号", unsigned: true
     t.integer "recommendedTime", default: 0, null: false, comment: "推荐时间", unsigned: true
@@ -1500,8 +1556,10 @@ ActiveRecord::Schema.define(version: 2018_04_21_162212) do
     t.integer "rewardPoint", default: 0, null: false, comment: "课程积分"
     t.integer "taskRewardPoint", default: 0, null: false, comment: "任务积分"
     t.integer "enableAudio", default: 0, null: false
+    t.boolean "isHideUnpublish", default: false, null: false, comment: "学员端是否隐藏未发布课时", unsigned: true
     t.index ["courseSetId", "status"], name: "courseSetId_status"
     t.index ["courseSetId"], name: "courseSetId"
+    t.index ["courseSetId"], name: "courseset_id_index"
   end
 
   create_table "crontab_job", id: :integer, comment: "编号", unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -1588,6 +1646,14 @@ ActiveRecord::Schema.define(version: 2018_04_21_162212) do
     t.integer "createdTime", null: false, comment: "下载时间", unsigned: true
     t.integer "userId", null: false, comment: "下载用户ID", unsigned: true
     t.index ["createdTime"], name: "createdTime"
+  end
+
+  create_table "face_log", id: :integer, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "userId", default: 0, null: false, unsigned: true
+    t.string "status", limit: 32, default: "", null: false
+    t.integer "createdTime", default: 0, null: false
+    t.string "sessionId", limit: 64, default: "", null: false, comment: "人脸识别sessionId"
+    t.index ["userId", "createdTime", "status"], name: "idx_userId_status_createdTime"
   end
 
   create_table "file", id: :integer, comment: "上传文件ID", unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -1764,6 +1830,15 @@ ActiveRecord::Schema.define(version: 2018_04_21_162212) do
     t.index ["keywordId"], name: "keywordId"
   end
 
+  create_table "linc_open_course_likes", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.bigint "open_course_id"
+    t.bigint "user_id"
+    t.integer "createdTime"
+    t.index ["open_course_id", "user_id"], name: "index_linc_open_course_likes_on_open_course_id_and_user_id", unique: true
+    t.index ["open_course_id"], name: "index_linc_open_course_likes_on_open_course_id"
+    t.index ["user_id"], name: "index_linc_open_course_likes_on_user_id"
+  end
+
   create_table "location", id: :bigint, unsigned: true, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "parentId", default: 0, null: false
     t.string "name", null: false
@@ -1777,6 +1852,22 @@ ActiveRecord::Schema.define(version: 2018_04_21_162212) do
     t.text "message", null: false, comment: "日志内容"
     t.text "data", comment: "日志数据"
     t.string "ip", null: false, comment: "日志记录IP"
+    t.integer "createdTime", null: false, comment: "日志发生时间", unsigned: true
+    t.string "level", limit: 10, null: false, comment: "日志等级"
+    t.index ["userId"], name: "userId"
+  end
+
+  create_table "log_v8", id: :integer, comment: "系统日志ID", unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "userId", default: 0, null: false, comment: "操作人ID", unsigned: true
+    t.string "module", limit: 32, null: false, comment: "日志所属模块"
+    t.string "action", limit: 50, null: false, comment: "日志所属操作类型"
+    t.text "message", null: false, comment: "日志内容"
+    t.text "data", comment: "日志数据"
+    t.string "ip", null: false, comment: "日志记录IP"
+    t.string "browser", limit: 120, default: "", comment: "操作人浏览器信息"
+    t.string "operatingSystem", limit: 120, default: "", comment: "操作人操作系统"
+    t.string "device", limit: 120, default: "", comment: "操作人移动端或者计算机 移动端mobile 计算机computer"
+    t.text "userAgent", comment: "操作人HTTP_USER_AGENT"
     t.integer "createdTime", null: false, comment: "日志发生时间", unsigned: true
     t.string "level", limit: 10, null: false, comment: "日志等级"
     t.index ["userId"], name: "userId"
@@ -1809,6 +1900,9 @@ ActiveRecord::Schema.define(version: 2018_04_21_162212) do
     t.string "reason", limit: 256, default: "", null: false, comment: "加入理由或退出理由"
     t.string "reason_type", default: "", null: false, comment: "用户退出或加入的类型：refund, remove, exit"
     t.integer "created_time", default: 0, null: false, unsigned: true
+    t.index ["operate_time"], name: "operate_time"
+    t.index ["operate_type", "operate_time"], name: "operateType_operateTime"
+    t.index ["operate_type", "target_type"], name: "operateType_targetType"
     t.index ["operate_type"], name: "operate_type"
     t.index ["order_id"], name: "order_id"
   end
@@ -1963,6 +2057,7 @@ ActiveRecord::Schema.define(version: 2018_04_21_162212) do
     t.integer "endTime", default: 0, null: false, comment: "直播课时结束时间", unsigned: true
     t.integer "memberNum", default: 0, null: false, comment: "直播课时加入人数", unsigned: true
     t.string "replayStatus", limit: 14, default: "ungenerated", null: false
+    t.string "progressStatus", limit: 100, default: "created", null: false, comment: "直播进行状态"
     t.integer "maxOnlineNum", default: 0, comment: "直播在线人数峰值"
     t.integer "liveProvider", default: 0, null: false, unsigned: true
     t.integer "userId", null: false, comment: "发布人ID", unsigned: true
@@ -2311,30 +2406,6 @@ ActiveRecord::Schema.define(version: 2018_04_21_162212) do
     t.integer "copyId", default: 0, null: false, comment: "复制问题对应Id"
   end
 
-  create_table "question_8_0_18_backup", id: :integer, comment: "题目ID", unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "type", limit: 64, default: "", null: false, comment: "题目类型"
-    t.text "stem", comment: "题干"
-    t.float "score", default: 0.0, null: false, comment: "分数", unsigned: true
-    t.text "answer", comment: "参考答案"
-    t.text "analysis", comment: "解析"
-    t.text "metas", comment: "题目元信息"
-    t.integer "categoryId", default: 0, null: false, comment: "类别", unsigned: true
-    t.string "difficulty", limit: 64, default: "normal", null: false, comment: "难度"
-    t.string "target", default: "", null: false, comment: "从属于"
-    t.integer "courseSetId", default: 0, null: false
-    t.integer "courseId", default: 0, null: false, unsigned: true
-    t.integer "lessonId", default: 0, null: false, unsigned: true
-    t.integer "parentId", default: 0, comment: "材料父ID", unsigned: true
-    t.integer "subCount", default: 0, null: false, comment: "子题数量", unsigned: true
-    t.integer "finishedTimes", default: 0, null: false, comment: "完成次数", unsigned: true
-    t.integer "passedTimes", default: 0, null: false, comment: "成功次数", unsigned: true
-    t.integer "createdUserId", default: 0, null: false, unsigned: true
-    t.integer "updatedUserId", default: 0, null: false, unsigned: true
-    t.integer "updatedTime", default: 0, null: false, comment: "更新时间", unsigned: true
-    t.integer "createdTime", default: 0, null: false, comment: "创建时间", unsigned: true
-    t.integer "copyId", default: 0, null: false, comment: "复制问题对应Id"
-  end
-
   create_table "question_analysis", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", comment: "答题分析表", force: :cascade do |t|
     t.integer "targetId", default: 0, null: false, unsigned: true
     t.string "targetType", limit: 30, null: false
@@ -2486,15 +2557,6 @@ ActiveRecord::Schema.define(version: 2018_04_21_162212) do
     t.integer "updatedTime", default: 0, null: false, comment: "更新时间", unsigned: true
   end
 
-  create_table "sessions", primary_key: "sess_id", id: :binary, limit: 128, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin", force: :cascade do |t|
-    t.integer "sess_user_id", default: 0, null: false, unsigned: true
-    t.binary "sess_data", null: false
-    t.integer "sess_time", null: false, unsigned: true
-    t.integer "sess_lifetime", limit: 3, null: false
-    t.integer "id", comment: "主键", unsigned: true
-    t.integer "sess_deadline", null: false, unsigned: true
-  end
-
   create_table "setting", id: :integer, comment: "系统设置ID", unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", limit: 64, default: "", null: false, comment: "系统设置名"
     t.binary "value", limit: 4294967295, comment: "系统设置值"
@@ -2552,6 +2614,8 @@ ActiveRecord::Schema.define(version: 2018_04_21_162212) do
     t.integer "likeNum", default: 0, null: false, comment: "被赞的数量", unsigned: true
     t.boolean "private", default: false, null: false, comment: "是否隐藏", unsigned: true
     t.integer "createdTime", default: 0, null: false, comment: "动态发布时间", unsigned: true
+    t.index ["classroomId", "createdTime"], name: "classroomId_createdTime"
+    t.index ["classroomId"], name: "classroomId"
     t.index ["courseId", "createdTime"], name: "courseId_createdTime"
     t.index ["createdTime"], name: "createdTime"
     t.index ["userId"], name: "userId"
@@ -2761,29 +2825,6 @@ ActiveRecord::Schema.define(version: 2018_04_21_162212) do
     t.index ["courseSetId"], name: "courseSetId"
   end
 
-  create_table "testpaper_v8_8_0_18_backup", id: :integer, comment: "id", unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "name", default: "", null: false, comment: "试卷名称"
-    t.text "description", comment: "试卷说明"
-    t.integer "courseId", default: 0, null: false
-    t.integer "lessonId", default: 0, null: false
-    t.integer "limitedTime", default: 0, null: false, comment: "限时(单位：秒)", unsigned: true
-    t.string "pattern", default: "", null: false, comment: "试卷生成/显示模式"
-    t.string "target", default: "", null: false
-    t.string "status", limit: 32, default: "draft", null: false, comment: "试卷状态：draft,open,closed"
-    t.float "score", default: 0.0, null: false, comment: "总分", unsigned: true
-    t.text "passedCondition"
-    t.integer "itemCount", default: 0, null: false, comment: "题目数量", unsigned: true
-    t.integer "createdUserId", default: 0, null: false, comment: "创建人", unsigned: true
-    t.integer "createdTime", default: 0, null: false, comment: "创建时间", unsigned: true
-    t.integer "updatedUserId", default: 0, null: false, comment: "修改人", unsigned: true
-    t.integer "updatedTime", default: 0, null: false, comment: "修改时间", unsigned: true
-    t.text "metas", comment: "题型排序"
-    t.integer "copyId", default: 0, null: false, comment: "复制试卷对应Id"
-    t.string "type", limit: 32, default: "testpaper", null: false, comment: "测验类型"
-    t.integer "courseSetId", default: 0, null: false, unsigned: true
-    t.integer "migrateTestId", default: 0, null: false, unsigned: true
-  end
-
   create_table "theme_config", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.text "config"
@@ -2932,6 +2973,7 @@ ActiveRecord::Schema.define(version: 2018_04_21_162212) do
     t.integer "createdUserId", null: false, comment: "文件上传人", unsigned: true
     t.integer "createdTime", null: false, comment: "文件上传时间", unsigned: true
     t.string "audioConvertStatus", limit: 7, default: "none", null: false, comment: "视频转音频的状态"
+    t.string "mp4ConvertStatus", limit: 7, default: "none", null: false, comment: "视频转mp4的状态"
     t.index ["convertHash"], name: "convertHash", unique: true, length: 64
     t.index ["hashId"], name: "hashId", unique: true, length: 120
   end
@@ -3007,12 +3049,15 @@ ActiveRecord::Schema.define(version: 2018_04_21_162212) do
     t.string "registeredWay", limit: 64, default: "", null: false, comment: "注册设备来源(web/ios/android)"
     t.string "distributorToken", default: "", null: false, comment: "分销平台token"
     t.string "uuid", default: "", null: false, comment: "用户uuid"
+    t.boolean "passwordInit", default: true, null: false, comment: "初始化密码"
+    t.boolean "faceRegistered", default: false, null: false, comment: "是否人脸注册过", unsigned: true
     t.index ["distributorToken"], name: "distributorToken"
     t.index ["email"], name: "email", unique: true
     t.index ["nickname"], name: "nickname", unique: true
     t.index ["type"], name: "user_type_index"
     t.index ["updatedTime"], name: "updatedTime"
     t.index ["uuid"], name: "uuid", unique: true
+    t.index ["verifiedMobile"], name: "verifiedMobile"
   end
 
   create_table "user_active_log", id: :integer, comment: "ID", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", comment: "活跃用户记录表", force: :cascade do |t|
@@ -3246,6 +3291,7 @@ ActiveRecord::Schema.define(version: 2018_04_21_162212) do
     t.integer "created_time", null: false, comment: "创建时间", unsigned: true
     t.integer "updated_time", null: false, comment: "更新时间", unsigned: true
     t.integer "is_push", limit: 1, default: 0, null: false, comment: "是否推送", unsigned: true
+    t.index ["user_id", "activity_id"], name: "userId_activityId"
   end
 
   create_table "xapi_statement", id: :integer, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

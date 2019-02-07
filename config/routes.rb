@@ -18,6 +18,8 @@ Rails.application.routes.draw do
 
       post 'notification/send_sns', to: 'notification#send_sns'
 
+      get 'find', to: 'find#index'
+
       get 'courses', to: 'courses#index'
       get 'courses/:id', to: 'courses#show'
     end

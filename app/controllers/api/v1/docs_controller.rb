@@ -55,6 +55,7 @@ module Api
       SWAGGERED_CLASSES = [
         Api::V1::SessionsController,
         Api::V1::UsersController,
+        Api::V1::FindController,
         Api::V1::CoursesController,
         Api::V1::NotificationController,
         self

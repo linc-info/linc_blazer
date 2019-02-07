@@ -36,6 +36,8 @@ gem 'swagger-blocks'
 
 gem 'aws-sdk-sns'
 
+gem 'active_model_serializers'
+
 group :development do
   # Use Capistrano for deployment
   gem 'capistrano-rails', require: false

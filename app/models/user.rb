@@ -3,7 +3,11 @@ class User < ApplicationRecord
   self.table_name = 'user'
   self.inheritance_column = :_type_disabled
 
-  has_many :user_profiles, foreign_key: 'id'
+  has_one :user_profile, foreign_key: 'id'
+  has_many :article_likes, foreign_key: 'userId'
+  has_many :articles, through: :article_likes
+  has_many :open_course_likes
+  has_many :open_courses, through: :open_course_likes
 
   validates :email, uniqueness: true
   validates_with Validations::EmailValidator
