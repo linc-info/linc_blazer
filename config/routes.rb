@@ -24,4 +24,6 @@ Rails.application.routes.draw do
       get 'courses/:id', to: 'courses#show'
     end
   end
+
+  get 'lp', to: 'lp#index'
 end
