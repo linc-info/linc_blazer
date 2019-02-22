@@ -33,6 +33,9 @@ gem 'httparty'
 gem 'blazer'
 gem 'dotenv-rails'
 
+gem 'jquery-rails'
+gem 'bootstrap', '~> 4.3.1'
+
 group :development do
   # Use Capistrano for deployment
   gem 'capistrano-rails', require: false
