@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   mount Sidekiq::Web, at: "/sidekiq"
 
   get 'lp', to: 'lp#index'
+  get 'lp/log', to: 'lp#log'
 end
