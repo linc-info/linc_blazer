@@ -1,12 +1,14 @@
 #linc_lp {
+  left: 12.5%;
   position: relative;
   height: 2530px;
+  width: 1040px;
   background: #FFFFFF;
-  margin: auto;
-  width: 1000px;
 }
 #background{
-  background: #3F0788;
+  background: #F3EAFF;
+  width: 200%;
+  height: 4000px;
 }
 
 #rectangle {
@@ -38,9 +40,8 @@
 #bg_top {
   position: absolute;
   left: 0;
-  right: -7.23%;
   top: 3.44%;
-  bottom: 48.88%;
+  width: 980px;
 }
 
 #ellipse {
