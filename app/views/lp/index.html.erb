@@ -263,7 +263,7 @@
     </div>
     <div id="text_1">点击【点击答题】进入考试列表页面，未注册的同学请先注册，并在个人信息页填写微信号获得红包。</div>
     <div id="text_2">注册后，点击答题列表中的考试题目开始考试。</div>
-    <div id="text_3">扫描二维码加羚课小助手微信好友，小助手会通过微信发送红包奖金</br>（汇率：人民币兑日元1：16）</br>wechat ID: yitoucunmin</div>
+    <div id="text_3">扫描二维码加羚课小助手微信好友，小助手会通过微信发送红包奖金（汇率：人民币兑日元1：16）</br>wechat ID: yitoucunmin</div>
     <div id="flow_arrow">
       <svg width="26" height="50" viewBox="0 0 26 50" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M2.92605 49.4828C2.59164 49.8276 2.17364 50 1.71383 50C1.25402 50 0.836014 49.8276 0.501608 49.4828C-0.167202 48.7931 -0.167202 47.6724 0.501608 46.9828L21.8199 25L0.501608 3.01724C-0.167202 2.32759 -0.167202 1.2069 0.501608 0.517241C1.17042 -0.172414 2.25724 -0.172414 2.92605 0.517241L25.4984 23.75C26.1672 24.4397 26.1672 25.5603 25.4984 26.25L2.92605 49.4828Z" fill="#3F0788"/>
@@ -305,8 +305,6 @@
 <%= stylesheet_link_tag 'lp', media: 'all' %>
 <script type="text/javascript">
   $(document).ready(function () {
-    document.body.style.zoom = 1.4;
-
     let via = $('#lp_button').attr('data-via');
     $(document).on("click", "#lp_button", function () {
       $.ajax({
