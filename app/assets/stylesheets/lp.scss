@@ -1,0 +1,295 @@
+#linc_lp {
+  position: relative;
+  height: 2530px;
+  background: #FFFFFF;
+  margin: auto;
+  width: 1000px;
+}
+#background{
+  background: #3F0788;
+}
+
+#rectangle {
+  position: absolute;
+  width: 1040px;
+  height: 117px;
+  left: 0;
+  top: 0px;
+
+  background: #3F0788;
+}
+
+#title {
+  position: absolute;
+  width: 805.08px;
+  height: 255.57px;
+  left: 105.92px;
+  top: 99px;
+}
+
+#sub_title {
+  position: absolute;
+  width: 531px;
+  height: 89px;
+  left: 70px;
+  top: 400px;
+}
+
+#bg_top {
+  position: absolute;
+  left: 0;
+  right: -7.23%;
+  top: 3.44%;
+  bottom: 48.88%;
+}
+
+#ellipse {
+  position: absolute;
+  width: 1627px;
+  height: 1536px;
+  left: 0;
+  top: 864px;
+}
+
+#ellipse_2 {
+  position: absolute;
+  width: 38px;
+  height: 38px;
+  left: 550px;
+  top: 1274px;
+}
+
+#million {
+  position: absolute;
+  left: 590px;
+  top: 640px;
+
+  transform: matrix(1, 0.08, -0.07, 1, 0, 0);
+}
+
+#million_bg {
+  position: absolute;
+  left: 520px;
+  top: 400px;
+  transform: matrix(1, 0.09, -0.09, 1, 0, 0);
+}
+
+#attention {
+  position: absolute;
+  width: 499px;
+  height: 118px;
+  left: 81px;
+  top: 569px;
+
+  font-family: CYuen2HKS;
+  line-height: 39px;
+  font-size: 24px;
+
+  color: #FFD029;
+
+  text-shadow: 0px 4px 0px #3F0788;
+}
+
+#flow {
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  #flow_vector {
+    position: absolute;
+    width: 98px;
+    height: 98px;
+    left: 344px;
+    top: 1030px;
+  }
+
+  #flow_title {
+    position: absolute;
+    width: 186px;
+    height: 52px;
+    left: 86px;
+    top: 1030px;
+
+    font-family: CYuen2HKS;
+    line-height: normal;
+    font-size: 45px;
+
+    color: #3F0788;
+  }
+
+  #flow_bg {
+    position: absolute;
+    width: 254px;
+    height: 40px;
+    left: 61px;
+    top: 1047px;
+  }
+
+  #step_1 {
+    position: absolute;
+    width: 96px;
+    height: 35px;
+    left: 90px;
+    top: 1127px;
+  }
+
+  #step_2 {
+    position: absolute;
+    width: 96px;
+    height: 34px;
+    left: 90px;
+    top: 1339px;
+  }
+
+  #step_3 {
+    position: absolute;
+    width: 96px;
+    height: 34px;
+    left: 87px;
+    top: 1518px;
+  }
+
+  #text_1 {
+    position: absolute;
+    width: 427px;
+    height: 95px;
+    left: 89px;
+    top: 1184px;
+
+    font-family: CYuen2HKS;
+    line-height: 38px;
+    font-size: 23px;
+
+    color: #3F0788;
+  }
+
+  #text_2 {
+    position: absolute;
+    width: 427px;
+    height: 63px;
+    left: 89px;
+    top: 1395px;
+
+    font-family: CYuen2HKS;
+    line-height: 38px;
+    font-size: 23px;
+
+    color: #3F0788;
+  }
+
+  #text_3 {
+    position: absolute;
+    width: 375px;
+    height: 117px;
+    left: 86px;
+    top: 1574px;
+
+    font-family: CYuen2HKS;
+    line-height: 38px;
+    font-size: 23px;
+
+    color: #3F0788;
+  }
+
+  #flow_arrow {
+    position: absolute;
+    width: 26px;
+    height: 50px;
+    left: 533px;
+    top: 1600px;
+  }
+
+  #flow_qr {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    left: 640px;
+    top: 1520px;
+  }
+}
+
+#shape_down {
+  position: absolute;
+  left: 0;
+  right: 0%;
+  top: 85.3%;
+  bottom: -0.04%;
+}
+
+#people {
+  position: absolute;
+  left: 700px;
+  right: 12.98%;
+  top: 83.56%;
+  bottom: 4.79%;
+}
+
+#intro {
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  #intro_vector {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    left: 353px;
+    top: 1764px;
+  }
+
+  #intro_title {
+    position: absolute;
+    width: 196px;
+    height: 49px;
+    left: 86px;
+    top: 1764px;
+
+    font-family: CYuen2HKS;
+    line-height: normal;
+    font-size: 45px;
+
+    color: #3F0788;
+  }
+
+  #intro_bg {
+    position: absolute;
+    width: 257px;
+    height: 40px;
+    left: 58px;
+    top: 1789px;
+  }
+
+  #intro_text {
+    position: absolute;
+    width: 831px;
+    height: 210px;
+    left: 86px;
+    top: 1879px;
+
+    font-family: CYuen2HKS;
+    line-height: normal;
+    font-size: 23px;
+
+    color: #3F0788;
+  }
+}
+#lp_button {
+  position: absolute;
+  width: 431px;
+  height: 87px;
+  left: 78px;
+  top: 2159px;
+
+  text-align: center;
+  padding-top: 10px;
+
+  background: linear-gradient(180deg, #FED33B 0%, rgba(255, 204, 27, 0) 100%), #FFA955;
+  box-shadow: 0px 10px 0px #F4C7FF;
+  border-radius: 200px;
+
+  font-family: CYuen2HKS;
+  line-height: normal;
+  font-size: 50px;
+  color: #FFFFFF;
+  text-shadow: 0px 4px 0px #CF6600;
+}
