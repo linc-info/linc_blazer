@@ -38,6 +38,9 @@ gem 'aws-sdk-sns'
 
 gem 'active_model_serializers'
 
+gem 'google-api-client', '~> 0.11'
+gem "google_drive"
+
 group :development do
   # Use Capistrano for deployment
   gem 'capistrano-rails', require: false

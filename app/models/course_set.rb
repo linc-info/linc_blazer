@@ -3,4 +3,5 @@ class CourseSet < ApplicationRecord
   self.inheritance_column = :_type_disabled
 
   has_one :course
+  has_many :course_tasks, foreign_key: "fromCourseSetId"
 end

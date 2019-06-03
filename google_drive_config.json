@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "lincblazer",
+  "private_key_id": "cf0edbc325687b6efab10cdb5e077469d0aebfd3",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDcRblSaJPHvKvn\nFA0oiHluyzpkQWuStAHKscPSsHbv+bj9q/kOTMtgqbnFthjSU0iw+8WTi1nDiTg5\nyjmez/sznY97ApZP0l0g0WXjfrtkdqpx2cMU9/iL66rtKJr0wZefVVKV3hC4MrPu\nnb5ynzQMXrjULvf7RHTdXRdezoi7vwyBgXzYtlgc3eiXs2DlX6AsDLcoXbN/Su+M\nfI2J+nd2+Zo+w7uG4SZw/1QZIIsPEVPpjX17Hm0s/4+8Ha/VHcRfU/buCRwYlPHX\nxSbGEZFu+0B5M2l0rx18YQRn14+sVku61MVykp3e86PPIwJ68QDYcCWcAr2EZIue\n/Ar5HoqDAgMBAAECggEAUyKhql+7/vPPsZxYxwaTRmS/uh0S28DCuFzVesyNZ09K\nKbvheSs0y1vjuKJcxe0XD21HCcPbcjh1FyKjErSOq9F42MWGM8RCz+MYYH9xfJ5p\nACVfQqfAkBa3YWEk8uGqN0G9tMCmcM76KEIzIhHCVDTf7312rMgOj4nWCztKUgk7\nD2pRJ66RDud4egOjpwZfldtHP+FBODeEKNggHLaZ6ZnJEtOA83HRV4mFjtDPYFiz\nLHUoe1swuF/U8mSZa52BfmKQWmApjxeZDFLj7dgOFUq8cgF7CGKZRIKnXATvPLd3\nTTCxvBdzNtGT+gf9019N2qIXQfaf9zS+6t+WhOkEUQKBgQDuck4iIcrcClnRtDvg\nzqqoy/dQ+At8V4re9YUnCkOlUKPKIqCHpaAX65UWAIwX/QRfOwnk3ujBix+UL7L1\nDfRlbopZQUH+ZMiRBT7Vf1zOF5pzb9l+oyd2KR4Xz3xkV94bzQ73HJT0FOsEuTDC\ntcVkui5IQBbPiQT0iqbZjzc0OQKBgQDsfOn4EkzgynILwfFhxyNZl3deT50K9Qdx\nXbgfazQ4ySOkE3ASfgYGMkGrtM4N0VVGLxsQkX2hk7CruAkHwcKDrD2o18aG2kwy\nFXpB6N2P9jeKE5vK8VlFEwguPIKBfrBizRlETdf/W5gXV8/pBomqZsSVJgrQWjtA\nRSBdMrlMmwKBgHu0MXTjsyqU9CQnLSlkDoWjy5rmFI9dm14wYfPvD0kknNSxQjcd\nZgEC50WS4xtO2IXPS0LBol9Gngty85TOuIwm3P+RK3ufLa6O2hpJCQyiki5xSJS6\ncC6NBl+z9QTZ0RD7QVhSK7S1ZXf9254oT1AChyBUn4DrxPZZOFaGRk2BAoGBAI+p\n7uTSETv6IEA+SKpStInntw9nJAsVAbl/6qvDj4zzvCAf4tSJFJXNEBIEm6zPP5OM\naE+vYve2Zfxbp7i7n7Qn/alFtAgWM3W1kHjbw0WCmQjbkqg96DJLNowIHGwYj4Tl\n/fR9qbsqZIHByb9RRm5rUf8dhjI+roIDvH6BowoDAoGBAMPC4jONtKREe7v5A3GZ\nQsMR0fHVFmag8FIBp3oqKChq7uNb4cLY7dZPUKP/RHPwwrpOTxtAD5h0haDexC5u\n0dqrD9WZzlWXf1HdKluWgTkEUoc682OxrcfmvIqK9oDOiOvCf9GMH0yjZD6cvkQW\ncs8gBbxQjnMuoxODcDe9OU47\n-----END PRIVATE KEY-----\n",
+  "client_email": "lincblazer@lincblazer.iam.gserviceaccount.com",
+  "client_id": "116863785437967200909",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/lincblazer%40lincblazer.iam.gserviceaccount.com"
+}
