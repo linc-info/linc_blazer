@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :open_course_likes
   has_many :open_courses, through: :open_course_likes
   has_many :course_task_results, foreign_key: "userId"
+  has_many :logs, foreign_key: "userId"
 
   validates :email, uniqueness: true
   validates_with Validations::EmailValidator
