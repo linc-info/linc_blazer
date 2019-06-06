@@ -5,4 +5,5 @@ Rails.application.routes.draw do
 
   get 'lp', to: 'lp#index'
   get 'lp/log', to: 'lp#log'
+  get 'bilibili', to: 'redirect#bilibili'
 end
